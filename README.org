@@ -1,0 +1,7 @@
+# Barrensea-Overlay
+This is a overlay of Gentoo Linux
+
+# Install
+#+begin_src shell
+  git clone https://github.com/barrensea/barrensea-overlay.git
+#+end_src
