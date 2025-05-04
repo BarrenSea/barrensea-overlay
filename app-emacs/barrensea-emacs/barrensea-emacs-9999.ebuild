@@ -31,4 +31,6 @@ src_install() {
 	dodir /usr/share/${PN}
 	cp -a "${S}"/* "${ED}"/usr/share/${PN} || die "Failed to copy"
 	dosym   /usr/share/${PN}/install.sh /usr/bin/install-${PN}.sh
+	fperms +x /usr/share/${PN}/install.sh
+	einstalldocs
 }
