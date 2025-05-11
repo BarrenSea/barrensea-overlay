@@ -3,5 +3,11 @@ This is a overlay of Gentoo Linux
 
 # Install
 #+begin_src shell
-  git clone https://github.com/barrensea/barrensea-overlay.git
+  eselect repository add barrensea-overlay
+  emaint sync -r barrensea-overlay
 #+end_src
+# Packages
+| Packages                    | Description                                         |
+| app-emacs/barrensea-emacs   | The barrensea emacs config                          |
+| games-emulation/ryujinx-bin | Experimental Nintendo Switch Emulator written in C# |
+| sys-kernel/barrensea-kernel | Linux Kernel with cjkpatch                          |
