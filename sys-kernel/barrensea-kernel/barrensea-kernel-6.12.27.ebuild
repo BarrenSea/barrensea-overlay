@@ -8,7 +8,7 @@ https://ghproxy.net/https://github.com/bigshans/cjktty-patches/blob/master/cjktt
 https://ghproxy.net/https://github.com/bigshans/cjktty-patches/blob/master/v6.x/cjktty-6.9.patch
 "
 
-inherit kernel-install toolchain-funcs
+inherit toolchain-funcs
 LICENSE="GPL-2"
 SLOT=0
 KEYWORDS="amd64 ~arm arm64 ~hppa ~loong ~ppc ppc64 ~riscv ~sparc x86"
