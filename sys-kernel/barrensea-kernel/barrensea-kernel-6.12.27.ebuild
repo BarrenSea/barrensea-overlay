@@ -81,5 +81,5 @@ src_install(){
 	dodir /boot
 	dodir /lib/modules
 	emake INSTALL_MOD_PATH=${ED} INSTALL_MOD_STRIP=1 modules_install ||die
-	emake INSTALL_PATH=${ED} install ||die
+	emake INSTALL_PATH=${ED}/boot install ||die
 }
