@@ -19,6 +19,7 @@ BDEPEND="
 	virtual/libelf
 	app-alternatives/yacc
 	app-crypt/sbsigntools
+	sys-kernel/dracut
 "
 PDEPEND="
 	sys-kernel/linux-firmware
@@ -82,4 +83,5 @@ src_install(){
 	dodir /lib/modules
 	emake INSTALL_MOD_PATH=${ED} INSTALL_MOD_STRIP=1 modules_install ||die
 	emake INSTALL_PATH=${ED}/boot install ||die
+	dracut --no-hostonly initramfs-${PV}-barrensea.img ${PV}-barrensea ||die
 }
