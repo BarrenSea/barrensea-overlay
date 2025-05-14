@@ -83,5 +83,5 @@ src_install(){
 	dodir /lib/modules
 	emake INSTALL_MOD_PATH=${ED} INSTALL_MOD_STRIP=1 modules_install ||die
 	emake INSTALL_PATH=${ED}/boot install ||die
-	dracut --no-hostonly initramfs-${PV}-barrensea.img ${PV}-barrensea ||die
+	einfo "Please Run dracut --no-hostonly initramfs-${PV}-barrensea.img 6.12.-barrensea to generate initramfs"
 }
