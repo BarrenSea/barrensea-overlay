@@ -4,12 +4,19 @@ DESCRIPTION="Linux Kernel with cjkpatch"
 HOMEPAGE="https://github.com/barrensea/barrensea-overlay"
 SRC_URI="https://mirrors.tuna.tsinghua.edu.cn/kernel/v6.x/linux-${PV}.tar.xz
 https://ghproxy.net/https://github.com/donjuanplatinum/notes/blob/main/config
+cjkpatch? (
 https://ghproxy.net/https://github.com/bigshans/cjktty-patches/blob/master/cjktty-add-cjk32x32-font-data.patch
+)
+cjkpatch? (
 https://ghproxy.net/https://github.com/bigshans/cjktty-patches/blob/master/v6.x/cjktty-6.9.patch
+)
 "
 
-inherit toolchain-funcs
+inherit toolchain-funcs kernel-build
+
+KV_FULL="${PV}-barrensea"
 LICENSE="GPL-2"
+IUSE="+cjkpatch +source"
 SLOT=0
 KEYWORDS="amd64 ~arm arm64 ~hppa ~loong ~ppc ppc64 ~riscv ~sparc x86"
 BDEPEND="
@@ -27,15 +34,18 @@ PDEPEND="
 S=${WORKDIR}/linux-${PV}
 
 src_prepare() {
-	cp ${DISTDIR}/*.patch ${S}/
-	cp ${DISTDIR}/config ${S}/.config || die
 	cd ${S}
-	patch -Np1 <cjktty-6.9.patch ||die
-	patch -Np1 <cjktty-add-cjk32x32-font-data.patch ||die
+	if use cjkpatch ; then
+		cp ${DISTDIR}/*.patch ${S}/
+		patch -Np1 <cjktty-6.9.patch ||die
+		patch -Np1 <cjktty-add-cjk32x32-font-data.patch ||die
+	fi
+	cp ${DISTDIR}/config ${S}/.config || die
+	kernel-build_merge_configs
 	default
 }
 src_configure() {
-		local HOSTLD="$(tc-getBUILD_LD)"
+	local HOSTLD="$(tc-getBUILD_LD)"
 	if type -P "${HOSTLD}.bfd" &>/dev/null; then
 		HOSTLD+=.bfd
 	fi
@@ -74,14 +84,11 @@ src_configure() {
 src_compile() {
 	cd ${S}
 	ARCH="x86_64"
-	emake || die
+	kernel-build_src_compile
 
 }
 src_install(){
 	cd ${S}
-	dodir /boot
-	dodir /lib/modules
-	emake INSTALL_MOD_PATH=${ED} INSTALL_MOD_STRIP=1 modules_install ||die
-	emake INSTALL_PATH=${ED}/boot install ||die
-	einfo "Please Run dracut --no-hostonly initramfs-${PV}-barrensea.img 6.12.-barrensea to generate initramfs"
+	kernel-install_pkg_postinst
+	kernel-build_src_install
 }
