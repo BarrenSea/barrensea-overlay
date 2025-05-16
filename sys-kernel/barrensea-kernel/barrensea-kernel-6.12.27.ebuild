@@ -79,7 +79,7 @@ src_configure() {
 
 		O="${WORKDIR}"/modprep
 	)
-
+	kernel-build_src_configure
 }
 src_compile() {
 	cd ${S}
