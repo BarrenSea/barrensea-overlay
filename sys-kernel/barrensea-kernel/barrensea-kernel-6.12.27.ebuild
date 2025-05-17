@@ -16,7 +16,7 @@ inherit toolchain-funcs kernel-build
 
 KV_FULL="${PV}-barrensea"
 LICENSE="GPL-2"
-IUSE="+cjkpatch +source"
+IUSE="+cjkpatch +source -debug"
 SLOT=0
 KEYWORDS="amd64 ~arm arm64 ~hppa ~loong ~ppc ppc64 ~riscv ~sparc x86"
 BDEPEND="
