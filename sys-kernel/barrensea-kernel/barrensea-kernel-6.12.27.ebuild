@@ -83,7 +83,6 @@ src_configure() {
 }
 src_compile() {
 	cd ${S}
-	ARCH="x86_64"
 	kernel-build_src_compile
 
 }
