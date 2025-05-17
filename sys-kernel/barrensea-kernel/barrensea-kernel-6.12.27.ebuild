@@ -82,12 +82,10 @@ src_configure() {
 	kernel-build_src_configure
 }
 src_compile() {
-	cd ${S}
 	kernel-build_src_compile
 
 }
 src_install(){
-	cd ${S}
-	kernel-install_pkg_postinst
 	kernel-build_src_install
+	kernel-install_pkg_postinst
 }
