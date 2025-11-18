@@ -22,7 +22,7 @@ src_unpack() {
 src_install() {
 	dodir /opt
 	dodir /usr
-	sed -i 's/Exec=\/usr\/bin\/wechat/Exec=\/opt\/wechat\/wechat/g' ${S}/usr/share/applications/* ||die
+	sed -i 's/Exec=\/usr\/bin\/wechat/Exec=QT_IM_MODULE="fcitx" GTK_IM_MODULE="fcitxc" XMODIFIERS="@im=fcitx" \/opt\/wechat\/wechat/g' ${S}/usr/share/applications/* ||die
 	fperms -wx ${S}/opt/wechat/libandromeda.so
 	fperms -wx ${S}/opt/wechat/libowl.so
 	fperms -wx ${S}/opt/wechat/libvoipCodec.so
